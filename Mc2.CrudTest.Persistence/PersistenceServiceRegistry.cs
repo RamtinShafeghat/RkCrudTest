@@ -1,6 +1,4 @@
-﻿using Mc2.Crud.SharedKernel.Contracts;
-using Mc2.CrudTest.Application.Contracts.Persistence;
-using Mc2.CrudTest.Persistence.EventRepositories;
+﻿using Mc2.CrudTest.Persistence.EventRepositories;
 using Mc2.CrudTest.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

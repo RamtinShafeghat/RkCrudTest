@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace Mc2.CrudTest.Application.Features.Customers.Commands;
+﻿namespace Mc2.CrudTest.Application.Features.Customers.Commands;
 
 public class CreateCustomerCommand : IRequest<CreateCustomerCommandResponse>
 {

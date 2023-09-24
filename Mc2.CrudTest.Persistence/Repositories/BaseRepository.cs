@@ -1,5 +1,4 @@
-﻿using Mc2.Crud.SharedKernel.Contracts;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Persistence.Repositories;
 

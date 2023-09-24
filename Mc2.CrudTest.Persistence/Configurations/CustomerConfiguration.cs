@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Mc2.CrudTest.Core.CustomerAggregate;
 
 namespace Mc2.CrudTest.Persistence.Configurations;
 

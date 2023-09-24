@@ -1,6 +1,4 @@
-﻿using Mc2.CrudTest.Core;
-using Mc2.CrudTest.Core.CustomerAggregate;
-using Mc2.CrudTest.Persistence.Converters;
+﻿using Mc2.CrudTest.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Persistence;

@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Mc2.CrudTest.Application.Contracts.Persistence;
-using Mc2.CrudTest.Core.CustomerAggregate;
-using MediatR;
+﻿using Mc2.CrudTest.Application.Contracts.Persistence;
 
 namespace Mc2.CrudTest.Application.Features.Customers.Commands;
 

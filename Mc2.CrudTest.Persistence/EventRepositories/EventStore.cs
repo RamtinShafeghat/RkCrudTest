@@ -1,6 +1,4 @@
-﻿using Mc2.Crud.SharedKernel.Contracts;
-using Mc2.CrudTest.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Mc2.CrudTest.Persistence.EventRepositories;
