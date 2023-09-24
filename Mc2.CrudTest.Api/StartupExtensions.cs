@@ -1,4 +1,5 @@
-﻿using Mc2.CrudTest.Application;
+﻿using Mc2.CrudTest.Api.Middlewares;
+using Mc2.CrudTest.Application;
 using Mc2.CrudTest.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -55,6 +56,8 @@ public static class StartupExtensions
         //app.UseRouting();
 
         app.UseAuthentication();
+
+        app.UseCustomExceptionHandler();
 
         app.UseCors("Open");
 

@@ -35,6 +35,7 @@ public class EventStore : IEventStore
         });
 
         await this.dbContext.EventDatas.AddRangeAsync(eventsToSave);
+        await this.dbContext.SaveChangesAsync();
     }
 
     public async Task<IReadOnlyCollection<IDomainEvent>> LoadEventsAsync(string aggregateId)
