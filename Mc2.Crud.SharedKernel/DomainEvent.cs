@@ -5,18 +5,6 @@ namespace Mc2.CrudTest.SharedKernel;
 
 public abstract class DomainEvent : IDomainEvent
 {
-    public Guid Id { get; }
-
-    public string AggregateId { get; }
-
-    [JsonIgnore]
-    public int Version { get; private set; }
-
-    [JsonIgnore]
-    public int Sequence { get; private set; }
-
-    public DateTime CreatedAt { get; set; }
-
     protected DomainEvent(string aggregateId)
     {
         this.Id = Guid.NewGuid();
@@ -33,6 +21,18 @@ public abstract class DomainEvent : IDomainEvent
         this.AggregateId = aggregateId;
         this.CreatedAt = createdAt;
     }
+
+    public Guid Id { get; }
+
+    public string AggregateId { get; }
+
+    [JsonIgnore]
+    public int Version { get; private set; }
+
+    [JsonIgnore]
+    public int Sequence { get; private set; }
+
+    public DateTime CreatedAt { get; set; }
 
     public void WithVersionAndSequence(int version, int sequence)
     {
