@@ -10,12 +10,12 @@ public class CreateCustomerCommandHandler :
 {
     private readonly IMapper mapper;
     private readonly ICustomerRepository customerRepository;
-    private readonly ICustomerEventRepository customerEventRepository;
+    private readonly ICustomerEventStore customerEventRepository;
 
     public CreateCustomerCommandHandler(
         IMapper mapper,
         ICustomerRepository customerRepository,
-        ICustomerEventRepository eventStoreRepository)
+        ICustomerEventStore eventStoreRepository)
     {
         this.mapper = mapper;
         this.customerEventRepository = eventStoreRepository;

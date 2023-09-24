@@ -42,9 +42,4 @@ public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
         dbContext.Set<T>().Remove(entity);
         await dbContext.SaveChangesAsync();
     }
-
-    public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
-    {
-        return await dbContext.Set<T>().Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
-    }
 }

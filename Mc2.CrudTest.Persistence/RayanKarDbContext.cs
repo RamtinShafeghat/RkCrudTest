@@ -1,4 +1,5 @@
-﻿using Mc2.CrudTest.Core.CustomerAggregate;
+﻿using Mc2.CrudTest.Core;
+using Mc2.CrudTest.Core.CustomerAggregate;
 using Mc2.CrudTest.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ public class RayanKarDbContext : DbContext
     }
 
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<EventData> EventDatas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

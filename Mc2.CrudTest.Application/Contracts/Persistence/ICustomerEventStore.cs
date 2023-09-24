@@ -3,6 +3,6 @@ using Mc2.CrudTest.Core.CustomerAggregate;
 
 namespace Mc2.CrudTest.Application.Contracts.Persistence;
 
-public interface ICustomerEventRepository : IEventRepository<Customer, Guid>
+public interface ICustomerEventStore : IAggregateEventStore<Customer>
 {
 }

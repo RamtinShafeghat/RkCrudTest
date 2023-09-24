@@ -19,8 +19,7 @@ public abstract class AggregateRoot<TIdentity> : Entity<TIdentity>, IAggregateRo
         foreach (IDomainEvent @event in events)
         {
             Mutate(@event);
-            int version = Version;
-            Version = version + 1;
+            Version++;
         }
     }
 
