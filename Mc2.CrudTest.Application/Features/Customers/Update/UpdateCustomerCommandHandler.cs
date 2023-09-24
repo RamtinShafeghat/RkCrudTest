@@ -40,6 +40,7 @@ public class UpdateCustomerCommandHandler :
                 request.LastName,
                 request.DateOfBirth,
                 request.Email,
+                request.PhoneNumber,
                 request.BankAccountNumber);
 
             await customerEventStore.SaveAsync(customer);

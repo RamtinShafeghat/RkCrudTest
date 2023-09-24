@@ -15,6 +15,7 @@ public class Customer : AggregateRoot<Guid>
     public string LastName { get; private set; }
     public DateOnly DateOfBirth { get; private set; }
     public string Email { get; private set; }
+    public string PhoneNumber { get; set; }
     public string BankAccountNumber { get; private set; }
     public bool IsDeleted { get; private set; }
 
@@ -23,6 +24,7 @@ public class Customer : AggregateRoot<Guid>
         string lastName,
         DateOnly dateOfBirth, 
         string email, 
+        string phoneNumber,
         string bankAccountNumber)
     {
         var customer = new Customer();
@@ -32,6 +34,7 @@ public class Customer : AggregateRoot<Guid>
             LastName = lastName, 
             DateOfBirth = dateOfBirth, 
             Email = email, 
+            PhoneNumber = phoneNumber,
             BankAccountNumber = bankAccountNumber
         });
 
@@ -44,6 +47,7 @@ public class Customer : AggregateRoot<Guid>
         string lastName,
         DateOnly dateOfBirth,
         string email,
+        string PhoneNumber,
         string bankAccountNumber)
     {
         existingCustomer.Apply(new CustomerUpdated(existingCustomer.Id.ToString())
@@ -52,6 +56,7 @@ public class Customer : AggregateRoot<Guid>
             LastName = lastName,
             DateOfBirth = dateOfBirth,
             Email = email,
+            PhoneNumber = PhoneNumber,
             BankAccountNumber = bankAccountNumber
         });
     }
@@ -70,8 +75,9 @@ public class Customer : AggregateRoot<Guid>
         Id = Guid.Parse(@event.AggregateId);
         FirstName = @event.FirstName;
         LastName = @event.LastName;
-        Email = @event.Email;
         DateOfBirth = @event.DateOfBirth;
+        Email = @event.Email;
+        PhoneNumber = @event.PhoneNumber;
         BankAccountNumber = @event.BankAccountNumber;
     }
     public void On(CustomerUpdated @event)
@@ -79,8 +85,9 @@ public class Customer : AggregateRoot<Guid>
         Id = Guid.Parse(@event.AggregateId);
         FirstName = @event.FirstName;
         LastName = @event.LastName;
-        Email = @event.Email;
         DateOfBirth = @event.DateOfBirth;
+        Email = @event.Email;
+        PhoneNumber = @event.PhoneNumber;
         BankAccountNumber = @event.BankAccountNumber;
     }
     public void On(CustomerDeleted @event)

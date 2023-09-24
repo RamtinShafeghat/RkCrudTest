@@ -13,6 +13,24 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
 
     public CustomerCommandValidator()
     {
+        RuleFor(customer => customer.FirstName)
+            .NotEmpty()
+            .WithMessage("FirstName is required")
+            .MaximumLength(50)
+            .WithMessage("FirstName max length is 50");
+
+        RuleFor(customer => customer.LastName)
+            .NotEmpty()
+            .WithMessage("LastName is required")
+            .MaximumLength(50)
+            .WithMessage("LastName max length is 50");
+
+        RuleFor(customer => customer.DateOfBirth)
+            .NotEmpty()
+            .WithMessage("DateOfBirth is required")
+            .Must(ValidateDateOfBirth)
+            .WithMessage("DateOfBirth is invalid");
+
         RuleFor(x => x.PhoneNumber)
             .NotEmpty()
             .WithMessage("PhoneNumber is required")
@@ -32,8 +50,10 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
            .WithMessage("BankAccountNumber is invalid");
     }
 
+    private bool ValidateDateOfBirth(DateOnly dateOnly) =>
+        dateOnly <= DateOnly.FromDateTime(DateTime.Now);
     private bool ValidatePhoneNumber(string phoneNumber) => 
         this.exValidator.ValidatePhoneNumber(phoneNumber);
-    private bool ValidateBankAccountNumber(string accountNumber) => 
-        accountNumber.Length is >= 6 and <= 20;
+    private bool ValidateBankAccountNumber(string accountNumber) =>
+        accountNumber.All(char.IsLetterOrDigit) && accountNumber.Length is >= 6 and <= 20;
 }
