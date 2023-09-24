@@ -1,3 +1,4 @@
+using Mc2.CrudTest.Application.Features.Customers.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,13 @@ public class CustomerController : ControllerBase
         this.mediator = mediator;
     }
 
+    [HttpGet(Name = "Get/{id}")]
+    public async Task<ActionResult> Get(Guid id)
+    {
+        var result = await this.mediator.Send(new GetCustomerQuery() { Id = id });
+        return Ok(result);
+    }
+
     [HttpPost(Name = "Add")]
     public async Task<ActionResult<CreateCustomerCommandResponse>> Create(
         [FromBody] CreateCustomerCommand createCommand)
@@ -22,7 +30,7 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost(Name = "Update")]
+    [HttpPut(Name = "Update")]
     public async Task<ActionResult<UpdateCustomerCommandResponse>> Update(
         [FromBody] UpdateCustomerCommand updateCommand)
     {
@@ -30,11 +38,10 @@ public class CustomerController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost(Name = "Delete")]
-    public async Task<ActionResult> Delete(
-        [FromBody] DeleteCustomerCommand deleteCommand)
+    [HttpDelete(Name = "Delete")]
+    public async Task<ActionResult> Delete(Guid id)
     {
-        await this.mediator.Send(deleteCommand);
+        await this.mediator.Send(new DeleteCustomerCommand { Id = id});
         return NoContent();
     }
 }
