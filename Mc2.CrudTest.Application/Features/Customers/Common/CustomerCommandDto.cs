@@ -1,6 +1,6 @@
 ﻿namespace Mc2.CrudTest.Application.Features.Customers.Common;
 
-public class CustomerCommand
+public class CustomerCommandDto
 {
     public string FirstName { get; set; } 
     public string LastName { get; set; }

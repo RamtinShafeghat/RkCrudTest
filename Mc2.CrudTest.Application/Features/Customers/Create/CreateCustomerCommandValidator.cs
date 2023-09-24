@@ -2,7 +2,7 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers.Create;
 
-public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
+public class CreateCustomerCommandValidator : AbstractValidator<CustomerCommandDto>
 {
     public CreateCustomerCommandValidator()
     {

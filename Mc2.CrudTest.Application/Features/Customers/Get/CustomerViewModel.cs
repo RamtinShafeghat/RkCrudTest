@@ -1,6 +1,6 @@
 ﻿namespace Mc2.CrudTest.Application.Features.Customers.Get;
 
-public class CustomerVM
+public class CustomerViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

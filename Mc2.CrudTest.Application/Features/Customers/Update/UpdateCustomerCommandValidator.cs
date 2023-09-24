@@ -2,7 +2,7 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers.Update;
 
-public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
+public class UpdateCustomerCommandValidator : AbstractValidator<CustomerCommandDto>
 {
     public UpdateCustomerCommandValidator()
     {

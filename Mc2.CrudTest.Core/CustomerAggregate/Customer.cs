@@ -19,50 +19,34 @@ public class Customer : AggregateRoot<Guid>
     public string BankAccountNumber { get; private set; }
     public bool IsDeleted { get; private set; }
 
-    public static Customer CreateCustomer(
-        string firstName,
-        string lastName,
-        DateOnly dateOfBirth, 
-        string email, 
-        string phoneNumber,
-        string bankAccountNumber)
+    public static Customer CreateCustomer(Dto dto)
     {
         var customer = new Customer();
         customer.Apply(new CustomerCreated(Guid.NewGuid().ToString())
         {
-            FirstName = firstName,
-            LastName = lastName, 
-            DateOfBirth = dateOfBirth, 
-            Email = email, 
-            PhoneNumber = phoneNumber,
-            BankAccountNumber = bankAccountNumber
+            FirstName = dto.FirstName,
+            LastName = dto.LastName, 
+            DateOfBirth = dto.DateOfBirth, 
+            Email = dto.Email, 
+            PhoneNumber = dto.PhoneNumber,
+            BankAccountNumber = dto.BankAccountNumber
         });
 
         return customer;
     }
-
-    public static void UpdateCustomer(
-        Customer existingCustomer,
-        string firstName,
-        string lastName,
-        DateOnly dateOfBirth,
-        string email,
-        string PhoneNumber,
-        string bankAccountNumber)
+    public static void UpdateCustomer(Customer existingCustomer,Dto dto)
     {
         existingCustomer.Apply(new CustomerUpdated(existingCustomer.Id.ToString())
         {
-            FirstName = firstName,
-            LastName = lastName,
-            DateOfBirth = dateOfBirth,
-            Email = email,
-            PhoneNumber = PhoneNumber,
-            BankAccountNumber = bankAccountNumber
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            DateOfBirth = dto.DateOfBirth,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+            BankAccountNumber = dto.BankAccountNumber
         });
     }
-
-    public static void DeleteCustomer(
-        Customer existingCustomer)
+    public static void DeleteCustomer(Customer existingCustomer)
     {
         existingCustomer.Apply(new CustomerDeleted(existingCustomer.Id.ToString())
         {
@@ -72,27 +56,34 @@ public class Customer : AggregateRoot<Guid>
 
     public void On(CustomerCreated @event)
     {
-        Id = Guid.Parse(@event.AggregateId);
-        FirstName = @event.FirstName;
-        LastName = @event.LastName;
-        DateOfBirth = @event.DateOfBirth;
-        Email = @event.Email;
-        PhoneNumber = @event.PhoneNumber;
-        BankAccountNumber = @event.BankAccountNumber;
+        OnCustomerCreatedOrUpdated(@event);
     }
     public void On(CustomerUpdated @event)
     {
-        Id = Guid.Parse(@event.AggregateId);
-        FirstName = @event.FirstName;
-        LastName = @event.LastName;
-        DateOfBirth = @event.DateOfBirth;
-        Email = @event.Email;
-        PhoneNumber = @event.PhoneNumber;
-        BankAccountNumber = @event.BankAccountNumber;
+        OnCustomerCreatedOrUpdated(@event);
     }
     public void On(CustomerDeleted @event)
     {
         Id = Guid.Parse(@event.AggregateId);
         IsDeleted = @event.IsDeleted;
     }
+    
+    private void OnCustomerCreatedOrUpdated(CustomerBaseEvent @event)
+    {
+        Id = Guid.Parse(@event.AggregateId);
+        FirstName = @event.FirstName;
+        LastName = @event.LastName;
+        DateOfBirth = @event.DateOfBirth;
+        Email = @event.Email;
+        PhoneNumber = @event.PhoneNumber;
+        BankAccountNumber = @event.BankAccountNumber;
+    }
+
+    public record Dto(
+        string FirstName, 
+        string LastName, 
+        DateOnly DateOfBirth, 
+        string Email,
+        string PhoneNumber,
+        string BankAccountNumber);
 }

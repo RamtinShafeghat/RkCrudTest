@@ -2,7 +2,7 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers.Common;
 
-public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
+public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
 {
     private readonly IExternalPhoneNumberValidator exValidator;
 

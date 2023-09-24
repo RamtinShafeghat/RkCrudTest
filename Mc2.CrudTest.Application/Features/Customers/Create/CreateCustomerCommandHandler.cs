@@ -5,13 +5,16 @@ namespace Mc2.CrudTest.Application.Features.Customers.Create;
 public class CreateCustomerCommandHandler :
     IRequestHandler<CreateCustomerCommand, CreateCustomerCommandResponse>
 {
+    private readonly IMapper mapper;
     private readonly ICustomerEventStore customerEventStore;
     private readonly ICustomerRepository customerRepository;
 
     public CreateCustomerCommandHandler(
+        IMapper mapper,
         ICustomerEventStore customerEventStore,
         ICustomerRepository customerRepository)
     {
+        this.mapper = mapper;
         this.customerEventStore = customerEventStore;
         this.customerRepository = customerRepository;
     }
@@ -22,7 +25,7 @@ public class CreateCustomerCommandHandler :
         var response = new CreateCustomerCommandResponse();
 
         var validator = new CreateCustomerCommandValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await validator.ValidateAsync(request.Dto, cancellationToken);
         if (validationResult.Errors.Count > 0)
         {
             response.Success = false;
@@ -32,13 +35,8 @@ public class CreateCustomerCommandHandler :
 
         if (response.Success)
         {
-            var customer = Customer.CreateCustomer(
-                request.FirstName,
-                request.LastName,
-                request.DateOfBirth,
-                request.Email,
-                request.PhoneNumber,
-                request.BankAccountNumber);
+            var customerDto = this.mapper.Map<Customer.Dto>(request.Dto);
+            var customer = Customer.CreateCustomer(customerDto);
 
             await customerEventStore.SaveAsync(customer);
             customer = await customerRepository.AddAsync(customer);

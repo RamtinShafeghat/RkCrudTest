@@ -19,4 +19,8 @@
 		<ProjectReference Include="..\Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\Customers\Extensions\" />
+	</ItemGroup>
+
 </Project>

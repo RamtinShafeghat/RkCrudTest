@@ -3,7 +3,7 @@ using Mc2.CrudTest.Application.Exceptions;
 
 namespace Mc2.CrudTest.Application.Features.Customers.Get;
 
-public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, CustomerVM>
+public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, CustomerViewModel>
 {
     private readonly IMapper mapper;
     private readonly ICustomerRepository customerRepository;
@@ -16,7 +16,7 @@ public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, Custome
         this.customerRepository = customerRepository;
     }
 
-    async Task<CustomerVM> IRequestHandler<GetCustomerQuery, CustomerVM>.Handle(
+    async Task<CustomerViewModel> IRequestHandler<GetCustomerQuery, CustomerViewModel>.Handle(
         GetCustomerQuery request, CancellationToken cancellationToken)
     {
         var customer = await this.customerRepository.GetByIdAsync(request.Id);
@@ -25,6 +25,6 @@ public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, Custome
         if (customer.IsDeleted)
             throw new BadRequestException($"Customer {request.Id} has already deleted");
 
-        return this.mapper.Map<CustomerVM>(customer);
+        return this.mapper.Map<CustomerViewModel>(customer);
     }
 }

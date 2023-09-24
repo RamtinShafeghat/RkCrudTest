@@ -21,11 +21,8 @@ public class DeleteCustomerCommandHandler :
         DeleteCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = await this.customerEventStore.RehydreateAsync(request.Id.ToString());
-        if (customer == null)
-            throw new NotFoundException(nameof(customer), request.Id);
-        if (customer.IsDeleted)
-            throw new BadRequestException($"Customer {request.Id} has already deleted");
-        
+        customer.ValidateExistence(request.Id);
+
         Customer.DeleteCustomer(customer);
 
         await customerEventStore.SaveAsync(customer);
