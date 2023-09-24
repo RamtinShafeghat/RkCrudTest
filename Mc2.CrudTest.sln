@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Persistence", "Mc2.CrudTest.Persistence\Mc2.CrudTest.Persistence.csproj", "{25AD34ED-2B11-4998-A9B6-F565854B9C2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Api", "Mc2.CrudTest.Api\Mc2.CrudTest.Api.csproj", "{92249AE4-8C64-4B9E-B11C-17E04742E1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Api", "Mc2.CrudTest.Api\Mc2.CrudTest.Api.csproj", "{92249AE4-8C64-4B9E-B11C-17E04742E1CC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A34729C3-E140-4320-BE86-2A897824386C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{92249AE4-8C64-4B9E-B11C-17E04742E1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92249AE4-8C64-4B9E-B11C-17E04742E1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92249AE4-8C64-4B9E-B11C-17E04742E1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A34729C3-E140-4320-BE86-2A897824386C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A34729C3-E140-4320-BE86-2A897824386C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A34729C3-E140-4320-BE86-2A897824386C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A34729C3-E140-4320-BE86-2A897824386C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

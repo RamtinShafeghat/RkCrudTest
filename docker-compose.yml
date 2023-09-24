@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  mc2.crudTest.api:
+    build:
+      context: .
+      dockerfile: Mc2.CrudTest.Api/Dockerfile
+    image: mc2.crudTest.api
+    container_name: mc2.crudTest.api
+    restart: on-failure
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+    depends_on: 
+      - mc2.sql_in_dc
+ 
+  mc2.sql_in_dc:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mc2.sql_in_dc
+    restart: always
+    ports:
+      - 1440:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "P@ssW0rd!"
+  
