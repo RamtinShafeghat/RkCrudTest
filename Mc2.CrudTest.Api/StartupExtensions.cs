@@ -1,6 +1,4 @@
 ﻿using Mc2.CrudTest.Api.Middlewares;
-using Mc2.CrudTest.Application;
-using Mc2.CrudTest.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -14,6 +12,7 @@ public static class StartupExtensions
 
         builder.Services.AddApplicationServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
+        builder.Services.AddInfrastructureServices();
 
         builder.Services.AddHttpContextAccessor();
 

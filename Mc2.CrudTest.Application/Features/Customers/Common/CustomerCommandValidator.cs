@@ -1,7 +1,16 @@
-﻿namespace Mc2.CrudTest.Application.Features.Customers.Common;
+﻿using Mc2.CrudTest.Application.Contracts.Infrastructure;
+
+namespace Mc2.CrudTest.Application.Features.Customers.Common;
 
 public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
 {
+    private readonly IExternalPhoneNumberValidator exValidator;
+
+    public CustomerCommandValidator(IExternalPhoneNumberValidator exValidator)
+    {
+        this.exValidator = exValidator;
+    }
+
     public CustomerCommandValidator()
     {
         RuleFor(x => x.PhoneNumber)
@@ -23,6 +32,8 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
            .WithMessage("BankAccountNumber is invalid");
     }
 
-    private bool ValidatePhoneNumber(string phoneNumber) => true;
-    private bool ValidateBankAccountNumber(string accountNumber) => accountNumber.Length is >= 6 and <= 20;
+    private bool ValidatePhoneNumber(string phoneNumber) => 
+        this.exValidator.ValidatePhoneNumber(phoneNumber);
+    private bool ValidateBankAccountNumber(string accountNumber) => 
+        accountNumber.Length is >= 6 and <= 20;
 }
