@@ -1,4 +1,4 @@
-﻿namespace Mc2.CrudTest.Persistence.EventRepositories;
+﻿namespace Mc2.CrudTest.Persistence.EventStores;
 
 internal class CustomerEventStore : ICustomerEventStore
 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Persistence.Configurations;
 
-public class ExemptVehicleConfiguration : IEntityTypeConfiguration<Customer>
+public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
@@ -11,7 +11,6 @@ public class ExemptVehicleConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.Property(p => p.FirstName)
                .IsRequired();
-
 
         builder.Property(p => p.LastName)
                .IsRequired();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace Mc2.CrudTest.Persistence.EventRepositories;
+namespace Mc2.CrudTest.Persistence.EventStores;
 
 public class EventStore : IEventStore
 {

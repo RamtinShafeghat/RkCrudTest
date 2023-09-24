@@ -1,4 +1,4 @@
-﻿using Mc2.CrudTest.Persistence.EventRepositories;
+﻿using Mc2.CrudTest.Persistence.EventStores;
 using Mc2.CrudTest.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
