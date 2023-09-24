@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.SharedKernel;
 
-namespace Mc2.CrudTest.Core.Customer.DomainEvents;
+namespace Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
 
 public class CustomerDeleted : DomainEvent
 {

@@ -1,8 +1,8 @@
 ﻿using Mc2.CrudTest.SharedKernel;
 
-namespace Mc2.CrudTest.Core.Customer.DomainEvents;
+namespace Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
 
-public class CustomerCreated : DomainEvent
+public class CustomerUpdated : DomainEvent
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -11,7 +11,7 @@ public class CustomerCreated : DomainEvent
     public string Email { get; set; }
     public string BankAccountNumber { get; set; }
 
-    public CustomerCreated(string aggregateId) : base(aggregateId)
+    public CustomerUpdated(string aggregateId) : base(aggregateId)
     {
     }
 }

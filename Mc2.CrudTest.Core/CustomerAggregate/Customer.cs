@@ -1,8 +1,8 @@
 ﻿using Mc2.Crud.SharedKernel;
 using Mc2.Crud.SharedKernel.Contracts;
-using Mc2.CrudTest.Core.Customer.DomainEvents;
+using Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
 
-namespace Mc2.CrudTest.Core.Customer;
+namespace Mc2.CrudTest.Core.CustomerAggregate;
 
 public class Customer : AggregateRoot<Guid>
 {
@@ -14,9 +14,9 @@ public class Customer : AggregateRoot<Guid>
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public DateOnly DateOfBirth { get; private set; }
-    public string Email { get; set; }
-    public string BankAccountNumber { get; set; }
-    public bool IsDeleted { get; set; }
+    public string Email { get; private set; }
+    public string BankAccountNumber { get; private set; }
+    public bool IsDeleted { get; private set; }
 
     public static Customer CreateCustomer(
         string firstName,
