@@ -1,6 +1,4 @@
-﻿using Mc2.Crud.SharedKernel;
-using Mc2.Crud.SharedKernel.Contracts;
-using Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
+﻿using Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
 
 namespace Mc2.CrudTest.Core.CustomerAggregate;
 
@@ -19,36 +17,36 @@ public class Customer : AggregateRoot<Guid>
     public string BankAccountNumber { get; private set; }
     public bool IsDeleted { get; private set; }
 
-    public static Customer CreateCustomer(Dto dto)
+    public static Customer Create(Dto createDto)
     {
         var customer = new Customer();
         customer.Apply(new CustomerCreated(Guid.NewGuid().ToString())
         {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName, 
-            DateOfBirth = dto.DateOfBirth, 
-            Email = dto.Email, 
-            PhoneNumber = dto.PhoneNumber,
-            BankAccountNumber = dto.BankAccountNumber
+            FirstName = createDto.FirstName,
+            LastName = createDto.LastName, 
+            DateOfBirth = createDto.DateOfBirth, 
+            Email = createDto.Email, 
+            PhoneNumber = createDto.PhoneNumber,
+            BankAccountNumber = createDto.BankAccountNumber
         });
 
         return customer;
     }
-    public static void UpdateCustomer(Customer existingCustomer,Dto dto)
+    public static void Update(Customer existing, Dto updateDto)
     {
-        existingCustomer.Apply(new CustomerUpdated(existingCustomer.Id.ToString())
+        existing.Apply(new CustomerUpdated(existing.Id.ToString())
         {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            DateOfBirth = dto.DateOfBirth,
-            Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
-            BankAccountNumber = dto.BankAccountNumber
+            FirstName = updateDto.FirstName,
+            LastName = updateDto.LastName,
+            DateOfBirth = updateDto.DateOfBirth,
+            Email = updateDto.Email,
+            PhoneNumber = updateDto.PhoneNumber,
+            BankAccountNumber = updateDto.BankAccountNumber
         });
     }
-    public static void DeleteCustomer(Customer existingCustomer)
+    public static void Delete(Customer existing)
     {
-        existingCustomer.Apply(new CustomerDeleted(existingCustomer.Id.ToString())
+        existing.Apply(new CustomerDeleted(existing.Id.ToString())
         {
             IsDeleted = true
         });

@@ -1,5 +1,4 @@
 ﻿using Mc2.CrudTest.Application.Contracts.Persistence;
-using Mc2.CrudTest.Application.Exceptions;
 
 namespace Mc2.CrudTest.Application.Features.Customers.Delete;
 
@@ -23,10 +22,14 @@ public class DeleteCustomerCommandHandler :
         var customer = await this.customerEventStore.RehydreateAsync(request.Id.ToString());
         customer.ValidateExistence(request.Id);
 
-        Customer.DeleteCustomer(customer);
+        Customer.Delete(customer);
 
-        await customerEventStore.SaveAsync(customer);
-        await customerRepository.DeleteAsync(customer);
+        var t = await this.customerEventStore.GetTransaction();
+        await t.RunInside(async () =>
+        {
+            await customerEventStore.SaveAsync(customer);
+            await customerRepository.DeleteAsync(customer);
+        });
 
         return Unit.Value;
     }

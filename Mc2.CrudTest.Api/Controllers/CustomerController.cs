@@ -1,5 +1,3 @@
-using Mc2.CrudTest.Application.Features.Customers.Get;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mc2.CrudTest.Api.Controllers;

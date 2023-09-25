@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.Persistence.EventStores;
 using Mc2.CrudTest.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,13 +11,13 @@ public static class PersistenceServiceRegistration
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<RayanKarDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("RayanKarDbConnectionString")), ServiceLifetime.Scoped);
+            options.UseSqlServer(configuration.GetConnectionString("RayanKarDbConnectionString")), ServiceLifetime.Transient);
 
-        services.AddScoped(typeof(IEventStore), typeof(EventStore));
-        services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+        services.AddTransient(typeof(IEventStore), typeof(EventStore));
+        services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 
-        services.AddScoped<ICustomerEventStore, CustomerEventStore>();
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<ICustomerEventStore, CustomerEventStore>();
+        services.AddTransient<ICustomerRepository, CustomerRepository>();
 
         return services;
     }

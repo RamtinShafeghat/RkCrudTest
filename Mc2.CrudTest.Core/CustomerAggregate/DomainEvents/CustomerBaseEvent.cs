@@ -1,6 +1,4 @@
-﻿using Mc2.CrudTest.SharedKernel;
-
-namespace Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
+﻿namespace Mc2.CrudTest.Core.CustomerAggregate.DomainEvents;
 
 public class CustomerBaseEvent : DomainEvent
 {

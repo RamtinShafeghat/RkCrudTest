@@ -1,4 +1,4 @@
-﻿namespace Mc2.Crud.SharedKernel;
+﻿namespace Mc2.CrudTest.SharedKernel;
 
 public abstract class Entity<TIdentity>
 {

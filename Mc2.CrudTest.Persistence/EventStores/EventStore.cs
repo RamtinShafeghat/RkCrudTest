@@ -18,6 +18,12 @@ public class EventStore : IEventStore
         this.dbContext = dbContext;
     }
 
+    public async Task<ITransactionCenter> GetTransaction()
+    {
+        var transaction = await this.dbContext.Database.BeginTransactionAsync();
+        return new TransactionCenter(transaction);
+    }
+
     public async Task SaveEventsAsync(IReadOnlyCollection<IDomainEvent> events, int version,
         string aggregateId, string aggregateName = "Aggregate Name")
     {

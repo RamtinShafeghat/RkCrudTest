@@ -1,4 +1,4 @@
-﻿using Mc2.Crud.SharedKernel.Contracts;
+﻿using Mc2.CrudTest.SharedKernel.Contracts;
 
 namespace Mc2.CrudTest.SharedKernel;
 

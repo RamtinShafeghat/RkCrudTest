@@ -1,7 +1,9 @@
-﻿namespace Mc2.Crud.SharedKernel.Contracts;
+﻿namespace Mc2.CrudTest.SharedKernel.Contracts;
 
-public interface IEventStore 
+public interface IEventStore
 {
+    Task<ITransactionCenter> GetTransaction();
+
     Task SaveEventsAsync(IReadOnlyCollection<IDomainEvent> events, 
         int version, string aggregateId, string aggregateName = "AggregateName");
 

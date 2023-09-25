@@ -23,7 +23,31 @@ public class CreateCustomerCommandHandler :
         CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var response = new CreateCustomerCommandResponse();
+        await Validate(request, response, cancellationToken);
 
+        if (response.Success)
+        {
+            var customerDto = this.mapper.Map<Customer.Dto>(request.Dto);
+            var customer = Customer.Create(customerDto);
+
+            var t = await this.customerEventStore.GetTransaction();
+            await t.RunInside(async () =>
+            {
+                await customerEventStore.SaveAsync(customer);
+                customer = await customerRepository.AddAsync(customer);
+            });
+
+            response.Id = customer.Id;
+        }
+
+        return response;
+    }
+
+    private static async Task Validate(
+        CreateCustomerCommand request, 
+        CreateCustomerCommandResponse response, 
+        CancellationToken cancellationToken)
+    {
         var validator = new CreateCustomerCommandValidator();
         var validationResult = await validator.ValidateAsync(request.Dto, cancellationToken);
         if (validationResult.Errors.Count > 0)
@@ -32,18 +56,5 @@ public class CreateCustomerCommandHandler :
             response.Message = "Create Failed";
             response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
         }
-
-        if (response.Success)
-        {
-            var customerDto = this.mapper.Map<Customer.Dto>(request.Dto);
-            var customer = Customer.CreateCustomer(customerDto);
-
-            await customerEventStore.SaveAsync(customer);
-            customer = await customerRepository.AddAsync(customer);
-
-            response.Id = customer.Id;
-        }
-
-        return response;
     }
 }

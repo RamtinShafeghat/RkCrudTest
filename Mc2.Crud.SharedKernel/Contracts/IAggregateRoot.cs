@@ -1,4 +1,4 @@
-﻿namespace Mc2.Crud.SharedKernel.Contracts;
+﻿namespace Mc2.CrudTest.SharedKernel.Contracts;
 
 public interface IAggregateRoot
 {
