@@ -15,7 +15,6 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet(Name = "Get/{id}")]
-    [Authorize(Roles ="admin")]
     public async Task<ActionResult> Get(Guid id)
     {
         var result = await this.mediator.Send(new GetCustomerQuery() { Id = id });
@@ -23,6 +22,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPost(Name = "Add")]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<CreateCustomerCommandResponse>> Create(
         [FromBody] CreateCustomerCommand createCommand)
     {
@@ -31,6 +31,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPut(Name = "Update")]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<UpdateCustomerCommandResponse>> Update(
         [FromBody] UpdateCustomerCommand updateCommand)
     {
@@ -39,6 +40,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpDelete(Name = "Delete")]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult> Delete(Guid id)
     {
         await this.mediator.Send(new DeleteCustomerCommand { Id = id});

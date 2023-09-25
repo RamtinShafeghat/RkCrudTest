@@ -7,6 +7,7 @@ namespace Mc2.CrudTest.Api.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IAuthenticationService authenticationService;
+
     public AccountController(IAuthenticationService authenticationService)
     {
         this.authenticationService = authenticationService;
