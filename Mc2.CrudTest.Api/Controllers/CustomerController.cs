@@ -40,6 +40,6 @@ public class CustomerController : ControllerBase
     public async Task<ActionResult> Delete(Guid id)
     {
         await this.mediator.Send(new DeleteCustomerCommand { Id = id});
-        return NoContent();
+        return Ok();
     }
 }

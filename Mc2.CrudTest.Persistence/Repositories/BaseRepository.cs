@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Mc2.CrudTest.Persistence.Repositories;
+﻿namespace Mc2.CrudTest.Persistence.Repositories;
 
 public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
 {
@@ -16,7 +14,6 @@ public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
         T t = await dbContext.Set<T>().FindAsync(id);
         return t;
     }
-
     public async Task<IReadOnlyList<T>> ListAllAsync()
     {
         return await dbContext.Set<T>().ToListAsync();
@@ -25,20 +22,18 @@ public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
     public async Task<T> AddAsync(T entity)
     {
         await dbContext.Set<T>().AddAsync(entity);
-        await dbContext.SaveChangesAsync();
+        await SaveChangesAsync();
 
         return entity;
     }
-
     public async Task UpdateAsync(T entity)
     {
         dbContext.Entry(entity).State = EntityState.Modified;
-        await dbContext.SaveChangesAsync();
+        await SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(T entity)
+    protected virtual async Task SaveChangesAsync()
     {
-        dbContext.Set<T>().Remove(entity);
         await dbContext.SaveChangesAsync();
     }
 }

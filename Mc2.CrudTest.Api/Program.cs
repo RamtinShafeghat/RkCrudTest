@@ -13,9 +13,8 @@ builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
        .WriteTo.Console()
        .ReadFrom.Configuration(context.Configuration));
 
-var app = builder
-            .ConfigureServices()
-            .ConfigurePipeline();
+var app = builder.ConfigureServices()
+                 .ConfigurePipeline();
 
 app.UseSerilogRequestLogging();
 

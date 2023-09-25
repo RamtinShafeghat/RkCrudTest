@@ -1,4 +1,4 @@
-﻿namespace Mc2.CrudTest.SharedKernel;
+﻿namespace Mc2.CrudTest.SharedKernel.Contracts;
 
 public interface ITransactionCenter
 {

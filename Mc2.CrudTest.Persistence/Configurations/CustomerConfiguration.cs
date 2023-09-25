@@ -18,6 +18,5 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.HasIndex(c => new { c.FirstName, c.LastName, c.DateOfBirth }).IsUnique(true);
         builder.HasIndex(c => c.Email).IsUnique(true);
-
     }
 }

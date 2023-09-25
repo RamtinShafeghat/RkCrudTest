@@ -3,13 +3,13 @@ using PhoneNumbers;
 
 namespace Mc2.CrudTest.Infrastructure._3rdParty;
 
-public class GooglePhoneNumberValidator : IExternalPhoneNumberValidator
+public class GooglePhoneNumberValidator : IExternalValidator
 {
     public bool ValidatePhoneNumber(string phoneNumber)
     {
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
 
-        PhoneNumber parsedNumber = phoneNumberUtil.Parse(phoneNumber, null);
+        PhoneNumber parsedNumber = phoneNumberUtil.Parse(phoneNumber, "IR");
         return phoneNumberUtil.IsValidNumber(parsedNumber);
     }
 }

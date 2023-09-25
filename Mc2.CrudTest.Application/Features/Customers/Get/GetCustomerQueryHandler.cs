@@ -1,7 +1,6 @@
 ﻿using Mc2.CrudTest.Application.Contracts.Persistence;
-using Mc2.CrudTest.Application.Exceptions;
 
-namespace Mc2.CrudTest.Application.Features.Customers.Get;
+namespace Mc2.CrudTest.Application.Features.Customers;
 
 public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, CustomerViewModel>
 {
@@ -20,10 +19,7 @@ public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, Custome
         GetCustomerQuery request, CancellationToken cancellationToken)
     {
         var customer = await this.customerRepository.GetByIdAsync(request.Id);
-        if (customer == null)
-            throw new NotFoundException(nameof(customer), request.Id);
-        if (customer.IsDeleted)
-            throw new BadRequestException($"Customer {request.Id} has already deleted");
+        customer.ValidateExistence(request.Id);
 
         return this.mapper.Map<CustomerViewModel>(customer);
     }

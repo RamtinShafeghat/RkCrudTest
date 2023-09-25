@@ -1,5 +1,4 @@
-﻿using Mc2.CrudTest.Application.Features.Customers.Common;
-using Mc2.CrudTest.Application.Features.Customers.Get;
+﻿using Mc2.CrudTest.Application.Features.Customers;
 
 namespace Mc2.CrudTest.Application.Profiles;
 

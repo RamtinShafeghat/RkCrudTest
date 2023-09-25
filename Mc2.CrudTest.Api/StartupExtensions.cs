@@ -52,8 +52,6 @@ public static class StartupExtensions
 
         app.UseHttpsRedirection();
 
-        //app.UseRouting();
-
         app.UseAuthentication();
 
         app.UseCustomExceptionHandler();

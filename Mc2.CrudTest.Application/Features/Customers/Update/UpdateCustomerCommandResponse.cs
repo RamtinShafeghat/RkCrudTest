@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.Application.Responses;
 
-namespace Mc2.CrudTest.Application.Features.Customers.Update;
+namespace Mc2.CrudTest.Application.Features.Customers;
 
 public class UpdateCustomerCommandResponse : BaseResponse
 {

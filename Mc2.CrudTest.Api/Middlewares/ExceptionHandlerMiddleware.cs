@@ -41,22 +41,19 @@ public class ExceptionHandlerMiddleware
                 break;
             case BadRequestException badRequestException:
                 httpStatusCode = HttpStatusCode.BadRequest;
-                result = badRequestException.Message;
+                result = JsonSerializer.Serialize(badRequestException.Message);
                 break;
             case NotFoundException:
                 httpStatusCode = HttpStatusCode.NotFound;
+                result = JsonSerializer.Serialize(exception.Message);
                 break;
             case Exception:
-                httpStatusCode = HttpStatusCode.BadRequest;
+                httpStatusCode = HttpStatusCode.InternalServerError;
+                result = JsonSerializer.Serialize(exception.Message);
                 break;
         }
 
         context.Response.StatusCode = (int)httpStatusCode;
-
-        if (result == string.Empty)
-        {
-            result = JsonSerializer.Serialize(new { error = exception.Message });
-        }
 
         return context.Response.WriteAsync(result);
     }

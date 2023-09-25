@@ -1,6 +1,4 @@
-﻿using Mc2.CrudTest.Application.Features.Customers.Common;
-
-namespace Mc2.CrudTest.Application.Features.Customers.Delete;
+﻿namespace Mc2.CrudTest.Application.Features.Customers;
 
 public class DeleteCustomerCommand : CustomerCommandDto, IRequest
 {

@@ -8,7 +8,7 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
-        services.AddScoped<IExternalPhoneNumberValidator, GooglePhoneNumberValidator>();
+        services.AddScoped<IExternalValidator, GooglePhoneNumberValidator>();
 
         return services;
     }

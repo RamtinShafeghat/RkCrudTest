@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.Application.Contracts.Persistence;
 
-namespace Mc2.CrudTest.Application.Features.Customers.Delete;
+namespace Mc2.CrudTest.Application.Features.Customers;
 
 public class DeleteCustomerCommandHandler :
     IRequestHandler<DeleteCustomerCommand>
@@ -28,7 +28,7 @@ public class DeleteCustomerCommandHandler :
         await t.RunInside(async () =>
         {
             await customerEventStore.SaveAsync(customer);
-            await customerRepository.DeleteAsync(customer);
+            await customerRepository.UpdateAsync(customer);
         });
 
         return Unit.Value;

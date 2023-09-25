@@ -1,27 +1,32 @@
 ﻿using Mc2.CrudTest.Application.Contracts.Infrastructure;
 
-namespace Mc2.CrudTest.Application.Features.Customers.Common;
+namespace Mc2.CrudTest.Application.Features.Customers;
 
 public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
 {
-    private readonly IExternalPhoneNumberValidator exValidator;
+    private readonly IExternalValidator exValidator;
 
-    public CustomerCommandValidator(IExternalPhoneNumberValidator exValidator)
+    public CustomerCommandValidator(IExternalValidator externalValidator) : base()
     {
-        this.exValidator = exValidator;
+        this.exValidator = externalValidator;
+        Validate();
     }
 
-    public CustomerCommandValidator()
+    private void Validate()
     {
         RuleFor(customer => customer.FirstName)
             .NotEmpty()
             .WithMessage("FirstName is required")
+            .NotEqual("string")
+            .WithMessage("FirstName can not be default")
             .MaximumLength(50)
             .WithMessage("FirstName max length is 50");
 
         RuleFor(customer => customer.LastName)
             .NotEmpty()
             .WithMessage("LastName is required")
+            .NotEqual("string")
+            .WithMessage("FirstName can not be default")
             .MaximumLength(50)
             .WithMessage("LastName max length is 50");
 
@@ -47,7 +52,7 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
            .NotEmpty()
            .WithMessage("BankAccountNumber is required")
            .Must(ValidateBankAccountNumber)
-           .WithMessage("BankAccountNumber is invalid");
+           .WithMessage("BankAccountNumber can be (digit) or (digit with letter)");
     }
 
     private bool ValidateDateOfBirth(DateOnly dateOnly) =>
@@ -55,5 +60,6 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
     private bool ValidatePhoneNumber(string phoneNumber) => 
         this.exValidator.ValidatePhoneNumber(phoneNumber);
     private bool ValidateBankAccountNumber(string accountNumber) =>
-        accountNumber.All(char.IsLetterOrDigit) && accountNumber.Length is >= 6 and <= 20;
+        accountNumber.All(char.IsLetterOrDigit) && accountNumber.Any(char.IsDigit) &&
+        accountNumber.Length is >= 6 and <= 20;
 }
