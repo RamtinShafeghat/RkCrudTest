@@ -13,6 +13,7 @@ public static class StartupExtensions
         builder.Services.AddApplicationServices();
         builder.Services.AddPersistenceServices(builder.Configuration);
         builder.Services.AddInfrastructureServices();
+        builder.Services.AddIdentityServices(builder.Configuration);
 
         builder.Services.AddHttpContextAccessor();
 
@@ -30,6 +31,29 @@ public static class StartupExtensions
     {
         services.AddSwaggerGen(c =>
         {
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Scheme = "Bearer",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {{
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "oauth2",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+                },
+                new List<string>()
+            }});
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Version = "v1",
@@ -67,9 +91,9 @@ public static class StartupExtensions
 
     public static async Task ResetDatabaseAsync(this WebApplication app)
     {
+        using var scope = app.Services.CreateScope();
         try
         {
-            using var scope = app.Services.CreateScope();
             var context = scope.ServiceProvider.GetService<RayanKarDbContext>();
             if (context != null)
             {
@@ -79,7 +103,27 @@ public static class StartupExtensions
         }
         catch (Exception ex)
         {
-            Console.Write($"{ex} - An error occurred while migrating the database.");
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+            logger.LogError(ex, "An error occurred while migrating the database.");
+        }
+    }
+    public static async Task ResetDatabaseIdentityAsync(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        try
+        {
+            var context = scope.ServiceProvider.GetService<RayanKarIdentityDbContext>();
+            var seed = scope.ServiceProvider.GetService<AdminUserSeed>();
+            if (context != null)
+            {
+                await context.Database.MigrateAsync();
+                await seed.SeedAdminUser();
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+            logger.LogError(ex, "An error occurred while migrating the identity database.");
         }
     }
 }

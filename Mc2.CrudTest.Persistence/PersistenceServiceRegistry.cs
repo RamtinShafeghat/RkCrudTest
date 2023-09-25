@@ -1,6 +1,5 @@
 ﻿using Mc2.CrudTest.Persistence.EventStores;
 using Mc2.CrudTest.Persistence.Repositories;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

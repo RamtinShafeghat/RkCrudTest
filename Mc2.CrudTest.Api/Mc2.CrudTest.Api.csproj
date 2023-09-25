@@ -28,6 +28,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Mc2.Crud.SharedKernel\Mc2.CrudTest.SharedKernel.csproj" />
 	  <ProjectReference Include="..\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj" />
+	  <ProjectReference Include="..\Mc2.CrudTest.Identity\Mc2.CrudTest.Identity.csproj" />
 	  <ProjectReference Include="..\Mc2.CrudTest.Infrastructure\Mc2.CrudTest.Infrastructure.csproj" />
 	  <ProjectReference Include="..\Mc2.CrudTest.Persistence\Mc2.CrudTest.Persistence.csproj" />
 	</ItemGroup>

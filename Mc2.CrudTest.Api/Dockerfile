@@ -9,6 +9,8 @@ COPY ["Mc2.CrudTest.Api/Mc2.CrudTest.Api.csproj", "Mc2.CrudTest.Api/"]
 COPY ["Mc2.Crud.SharedKernel/Mc2.CrudTest.SharedKernel.csproj", "Mc2.Crud.SharedKernel/"]
 COPY ["Mc2.CrudTest.Application/Mc2.CrudTest.Application.csproj", "Mc2.CrudTest.Application/"]
 COPY ["Mc2.CrudTest.Core/Mc2.CrudTest.Core.csproj", "Mc2.CrudTest.Core/"]
+COPY ["Mc2.CrudTest.Identity/Mc2.CrudTest.Identity.csproj", "Mc2.CrudTest.Identity/"]
+COPY ["Mc2.CrudTest.Infrastructure/Mc2.CrudTest.Infrastructure.csproj", "Mc2.CrudTest.Infrastructure/"]
 COPY ["Mc2.CrudTest.Persistence/Mc2.CrudTest.Persistence.csproj", "Mc2.CrudTest.Persistence/"]
 RUN dotnet restore "Mc2.CrudTest.Api/Mc2.CrudTest.Api.csproj"
 COPY . .

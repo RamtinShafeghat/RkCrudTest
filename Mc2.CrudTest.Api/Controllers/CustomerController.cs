@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mc2.CrudTest.Api.Controllers;
@@ -14,6 +15,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet(Name = "Get/{id}")]
+    [Authorize(Roles ="admin")]
     public async Task<ActionResult> Get(Guid id)
     {
         var result = await this.mediator.Send(new GetCustomerQuery() { Id = id });

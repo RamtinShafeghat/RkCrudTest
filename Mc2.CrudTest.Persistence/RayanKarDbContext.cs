@@ -1,5 +1,4 @@
 ﻿using Mc2.CrudTest.Persistence.Converters;
-using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Persistence;
 

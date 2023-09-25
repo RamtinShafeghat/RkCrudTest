@@ -19,5 +19,6 @@ var app = builder.ConfigureServices()
 app.UseSerilogRequestLogging();
 
 await app.ResetDatabaseAsync();
+await app.ResetDatabaseIdentityAsync();
 
 app.Run();
