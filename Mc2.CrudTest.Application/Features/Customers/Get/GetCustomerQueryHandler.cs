@@ -15,8 +15,7 @@ public class GetCustomerQueryHandler : IRequestHandler<GetCustomerQuery, Custome
         this.customerRepository = customerRepository;
     }
 
-    async Task<CustomerViewModel> IRequestHandler<GetCustomerQuery, CustomerViewModel>.Handle(
-        GetCustomerQuery request, CancellationToken cancellationToken)
+    public async Task<CustomerViewModel> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
     {
         var customer = await this.customerRepository.GetByIdAsync(request.Id);
         customer.ValidateExistence(request.Id);

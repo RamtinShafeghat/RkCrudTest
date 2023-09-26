@@ -51,12 +51,15 @@ public class CreateCustomerCommandHandler :
         CreateCustomerCommandResponse response, 
         CancellationToken cancellationToken)
     {
-        var validationResult = await this.validator.ValidateAsync(request.Dto, cancellationToken);
-        if (validationResult.Errors.Count > 0)
+        if (this.validator != default)
         {
-            response.Success = false;
-            response.Message = "Create Failed";
-            response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            var validationResult = await this.validator.ValidateAsync(request.Dto, cancellationToken);
+            if (validationResult.Errors.Count > 0)
+            {
+                response.Success = false;
+                response.Message = "Create Failed";
+                response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            }
         }
     }
 }

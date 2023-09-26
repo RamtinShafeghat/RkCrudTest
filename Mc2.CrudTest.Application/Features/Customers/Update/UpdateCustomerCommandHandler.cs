@@ -52,12 +52,15 @@ public class UpdateCustomerCommandHandler :
         UpdateCustomerCommandResponse response, 
         CancellationToken cancellationToken)
     {
-        var validationResult = await this.validator.ValidateAsync(request.Dto, cancellationToken);
-        if (validationResult.Errors.Count > 0)
+        if (validator != default)
         {
-            response.Success = false;
-            response.Message = "Update Failed";
-            response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            var validationResult = await this.validator.ValidateAsync(request.Dto, cancellationToken);
+            if (validationResult.Errors.Count > 0)
+            {
+                response.Success = false;
+                response.Message = "Update Failed";
+                response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+            }
         }
     }
 }
