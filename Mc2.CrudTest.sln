@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Identity", "Mc2.CrudTest.Identity\Mc2.CrudTest.Identity.csproj", "{2B9C1B4A-CFB7-4C44-A2B1-120EEA574963}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{09ADE467-4ADE-44F2-BA8B-1D680709B1A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Core.UnitTests", "Tests\Mc2.CrudTest.Core.UnitTests\Mc2.CrudTest.Core.UnitTests.csproj", "{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,9 +67,16 @@ Global
 		{2B9C1B4A-CFB7-4C44-A2B1-120EEA574963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B9C1B4A-CFB7-4C44-A2B1-120EEA574963}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B9C1B4A-CFB7-4C44-A2B1-120EEA574963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A37F8EA0-7B2C-447C-9A23-AB1F8BE1D50E} = {09ADE467-4ADE-44F2-BA8B-1D680709B1A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

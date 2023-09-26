@@ -78,10 +78,11 @@ public class Customer : AggregateRoot<Guid>
     }
 
     public record Dto(
-        string FirstName, 
-        string LastName, 
-        DateOnly DateOfBirth, 
+        string FirstName,
+        string LastName,
+        DateOnly DateOfBirth,
         string Email,
         string PhoneNumber,
-        string BankAccountNumber);
+        string BankAccountNumber)
+    { }
 }
