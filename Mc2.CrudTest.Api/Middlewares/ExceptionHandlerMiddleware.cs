@@ -1,4 +1,5 @@
 ﻿using Mc2.CrudTest.Application.Exceptions;
+using Serilog;
 using System.Net;
 using System.Text.Json;
 
@@ -48,13 +49,13 @@ public class ExceptionHandlerMiddleware
                 result = JsonSerializer.Serialize(exception.Message);
                 break;
             case Exception:
-                httpStatusCode = HttpStatusCode.InternalServerError;
+                httpStatusCode = HttpStatusCode.BadRequest;
                 result = JsonSerializer.Serialize(exception.Message);
                 break;
         }
 
+        Log.Error(result);
         context.Response.StatusCode = (int)httpStatusCode;
-
         return context.Response.WriteAsync(result);
     }
 }

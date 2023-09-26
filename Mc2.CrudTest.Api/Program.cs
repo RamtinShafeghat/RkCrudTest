@@ -16,8 +16,6 @@ builder.Host.UseSerilog((context, loggerConfiguration) => loggerConfiguration
 var app = builder.ConfigureServices()
                  .ConfigurePipeline();
 
-app.UseSerilogRequestLogging();
-
 await app.ResetDatabaseAsync();
 await app.ResetDatabaseIdentityAsync();
 
