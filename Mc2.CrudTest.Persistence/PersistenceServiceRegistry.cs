@@ -7,10 +7,13 @@ namespace Mc2.CrudTest.Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration, bool useDb=true)
     {
-        services.AddDbContext<RayanKarDbContext>(options =>
+        if (useDb)
+        {
+            services.AddDbContext<IRayanKarDbContext, RayanKarDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("RayanKarDbConnectionString")), ServiceLifetime.Transient);
+        }
 
         services.AddTransient(typeof(IEventStore), typeof(EventStore));
         services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));

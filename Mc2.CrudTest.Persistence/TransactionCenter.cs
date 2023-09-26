@@ -6,6 +6,10 @@ public class TransactionCenter : ITransactionCenter
 {
     private readonly IDbContextTransaction transaction;
 
+    public TransactionCenter()
+    {
+    }
+
     public TransactionCenter(IDbContextTransaction transaction)
     {
         this.transaction = transaction;
@@ -16,11 +20,11 @@ public class TransactionCenter : ITransactionCenter
         try
         {
             await action();
-            transaction.Commit();
+            transaction?.Commit();
         }
         catch (Exception)
         {
-            transaction.Rollback();
+            transaction?.Rollback();
             throw;
         }
     }

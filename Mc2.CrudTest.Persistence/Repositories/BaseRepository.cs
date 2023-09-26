@@ -2,9 +2,9 @@
 
 public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
 {
-    protected readonly RayanKarDbContext dbContext;
+    protected readonly IRayanKarDbContext dbContext;
 
-    public BaseRepository(RayanKarDbContext dbContext)
+    public BaseRepository(IRayanKarDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
@@ -34,6 +34,6 @@ public class BaseRepository<T> : IRepository<T> where T : class, IAggregateRoot
 
     protected virtual async Task SaveChangesAsync()
     {
-        await dbContext.SaveChangesAsync();
+        await dbContext.SaveAsync();
     }
 }

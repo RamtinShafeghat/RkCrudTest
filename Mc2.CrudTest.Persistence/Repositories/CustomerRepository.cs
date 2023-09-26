@@ -2,7 +2,7 @@
 
 internal class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
-    public CustomerRepository(RayanKarDbContext dbContext) : base(dbContext)
+    public CustomerRepository(IRayanKarDbContext dbContext) : base(dbContext)
     {
     }
 

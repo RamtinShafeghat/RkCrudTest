@@ -22,7 +22,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPost(Name = "Add")]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public async Task<ActionResult<CreateCustomerCommandResponse>> Create(
         [FromBody] CreateCustomerCommand createCommand)
     {

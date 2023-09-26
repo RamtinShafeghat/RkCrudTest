@@ -10,16 +10,19 @@ public class EventStore : IEventStore
         NullValueHandling = NullValueHandling.Ignore
     };
 
-    private readonly RayanKarDbContext dbContext;
+    private readonly IRayanKarDbContext dbContext;
 
-    public EventStore(RayanKarDbContext dbContext)
+    public EventStore(IRayanKarDbContext dbContext)
     {
         this.dbContext = dbContext;
     }
 
     public async Task<ITransactionCenter> GetTransaction()
     {
-        var transaction = await this.dbContext.Database.BeginTransactionAsync();
+        if (this.dbContext.InMemory)
+            return new TransactionCenter();
+
+        var transaction = await this.dbContext.BeginTransactionAsync();
         return new TransactionCenter(transaction);
     }
 
@@ -40,7 +43,7 @@ public class EventStore : IEventStore
         });
 
         await this.dbContext.EventDatas.AddRangeAsync(eventsToSave);
-        await this.dbContext.SaveChangesAsync();
+        await this.dbContext.SaveAsync();
     }
 
     public async Task<IReadOnlyCollection<IDomainEvent>> LoadEventsAsync(string aggregateId)

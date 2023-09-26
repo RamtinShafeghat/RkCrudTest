@@ -94,11 +94,11 @@ public static class StartupExtensions
         using var scope = app.Services.CreateScope();
         try
         {
-            var context = scope.ServiceProvider.GetService<RayanKarDbContext>();
+            var context = scope.ServiceProvider.GetService<IRayanKarDbContext>();
             if (context != null)
             {
-                await context.Database.EnsureDeletedAsync();
-                await context.Database.MigrateAsync();
+                await context.EnsureDeletedAsync();
+                await context.MigrateAsync();
             }
         }
         catch (Exception ex)
