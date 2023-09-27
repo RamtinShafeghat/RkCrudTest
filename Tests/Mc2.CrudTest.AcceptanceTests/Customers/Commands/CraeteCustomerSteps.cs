@@ -1,9 +1,5 @@
-﻿using Mc2.CrudTest.AcceptanceTests.Customers.Commands;
-using Mc2.CrudTest.Application.Contracts.Persistence;
-using Mc2.CrudTest.Application.Features.Customers;
-using MediatR;
+﻿using Mc2.CrudTest.AcceptanceTests.Customers;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 using TechTalk.SpecFlow.Assist;
 using AppContext = Mc2.CrudTest.AcceptanceTests.Shared.AppContext;
 
@@ -13,14 +9,16 @@ namespace Mc2.CrudTest.AcceptanceTests.Features.Customer;
 public class CreateACustomerSteps
 {
     private readonly IMediator mediator;
-
+    
     private readonly AppContext context;
     private readonly CreateCustomerCommand createCmd;
+    
+    private Guid createdId;
 
     public CreateACustomerSteps(AppContext context)
     {
         mediator = context.Container.GetService<IMediator>();
-
+        
         this.context = context;
         createCmd = new CreateCustomerCommand();
 
@@ -29,7 +27,7 @@ public class CreateACustomerSteps
     [Given(@"the following customer info:")]
     public void GivenTheFollowingCustomerInfo(Table table)
     {
-        var customerTable = table.CreateInstance<CreateCustomerTable>();
+        var customerTable = table.CreateInstance<CustomerTable>();
         this.createCmd.Dto = new CustomerCommandDto
         {
             FirstName = customerTable.FirstName,
@@ -44,17 +42,17 @@ public class CreateACustomerSteps
     [When(@"I create a customer")]
     public async Task WhenICreateACustomer()
     {
-        await mediator.Send(this.createCmd);
+        createdId = (await mediator.Send(this.createCmd)).Id;
     }
 
     [Then(@"the following customers record should be recorded:")]
     public async Task ThenTheFollowingCustomersRecordShouldBeRecorded(Table table)
     {
-        var customerTable = table.CreateInstance<CreateCustomerTable>();
+        var customerTable = table.CreateInstance<CustomerTable>();
 
         var customerRepository = context.Container.GetService<ICustomerRepository>();
 
-        var customer = (await customerRepository.ListAllAsync()).First();
+        var customer = (await customerRepository.ListAllAsync()).First(a => a.Id == createdId);
 
         Assert.That(customer.FirstName,
             Is.EqualTo(customerTable.FirstName));

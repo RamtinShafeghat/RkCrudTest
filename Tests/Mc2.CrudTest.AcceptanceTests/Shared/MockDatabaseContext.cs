@@ -1,7 +1,4 @@
-﻿using Mc2.CrudTest.Core;
-using Mc2.CrudTest.Core.CustomerAggregate;
-using Mc2.CrudTest.Persistence;
-using Mc2.CrudTest.Persistence.Configurations;
+﻿using Mc2.CrudTest.Persistence.Configurations;
 using Mc2.CrudTest.Persistence.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -37,7 +34,10 @@ public class MockDatabaseContext : DbContext, IRayanKarDbContext
 
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
         new EventDataConfiguration().Configure(builder.Entity<EventData>());
+        
+        builder.Seed();
     }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder builder)
     {
         base.ConfigureConventions(builder);
@@ -45,5 +45,4 @@ public class MockDatabaseContext : DbContext, IRayanKarDbContext
         builder.Properties<DateOnly>()
                .HaveConversion<DateOnlyConverter>();
     }
-
 }

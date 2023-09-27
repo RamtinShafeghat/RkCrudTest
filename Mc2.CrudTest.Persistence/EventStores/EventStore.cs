@@ -4,7 +4,7 @@ namespace Mc2.CrudTest.Persistence.EventStores;
 
 public class EventStore : IEventStore
 {
-    private readonly JsonSerializerSettings jsonSerializerSettings = new()
+    public static readonly JsonSerializerSettings jsonSerializerSettings = new()
     {
         TypeNameHandling = TypeNameHandling.All,
         NullValueHandling = NullValueHandling.Ignore
@@ -30,8 +30,15 @@ public class EventStore : IEventStore
         string aggregateId, string aggregateName = "Aggregate Name")
     {
         if (events.Count == 0) return;
+        var eventsToSave = GetEventData(events, version, aggregateId, aggregateName);
 
-        var eventsToSave = events.Select(e => new EventData
+        await this.dbContext.EventDatas.AddRangeAsync(eventsToSave);
+        await this.dbContext.SaveAsync();
+    }
+    public static IEnumerable<EventData> GetEventData(IReadOnlyCollection<IDomainEvent> events, 
+        int version, string aggregateId, string aggregateName)
+    {
+        return events.Select(e => new EventData
         {
             Id = Guid.NewGuid(),
             Name = e.GetType().Name,
@@ -41,9 +48,6 @@ public class EventStore : IEventStore
             Version = ++version,
             CreatedAt = e.CreatedAt
         });
-
-        await this.dbContext.EventDatas.AddRangeAsync(eventsToSave);
-        await this.dbContext.SaveAsync();
     }
 
     public async Task<IReadOnlyCollection<IDomainEvent>> LoadEventsAsync(string aggregateId)

@@ -1,6 +1,6 @@
-﻿namespace Mc2.CrudTest.AcceptanceTests.Customers.Commands;
+﻿namespace Mc2.CrudTest.AcceptanceTests.Customers;
 
-public class CreateCustomerTable
+public class CustomerTable
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

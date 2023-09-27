@@ -1,10 +1,7 @@
 ﻿using Moq.AutoMock;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Runtime.Loader;
-using Mc2.CrudTest.Persistence;
-using Mc2.CrudTest.Application;
-using Mc2.CrudTest.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Mc2.CrudTest.AcceptanceTests.Shared;
 
