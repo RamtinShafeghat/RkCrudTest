@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <SpecFlowObsoleteCodeBehindFiles Remove="Customers\Commands\CreateCustomer.feature.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
       <UpToDateCheckInput Remove="customers\commands\CreateCustomer.feature" />
+      <UpToDateCheckInput Remove="customers\UpdateCustomer.feature" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TechTalk.SpecFlow.Assist;
 using AppContext = Mc2.CrudTest.AcceptanceTests.Shared.AppContext;
 
-namespace Mc2.CrudTest.AcceptanceTests.Features.Customer;
+namespace Mc2.CrudTest.AcceptanceTests.Features.Customer.GetItem;
 
 [Binding]
 public class GetCustomerSteps

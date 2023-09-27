@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Mc2.CrudTest.AcceptanceTests.Customers.Queries
+namespace Mc2.CrudTest.AcceptanceTests.Customers.Commands.Update
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,23 +20,23 @@ namespace Mc2.CrudTest.AcceptanceTests.Customers.Queries
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Get A Customer")]
-    public partial class GetACustomerFeature
+    [NUnit.Framework.DescriptionAttribute("Update a Customer")]
+    public partial class UpdateACustomerFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "GetCustomer.feature"
+#line 1 "UpdateCustomer.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customers/Queries", "Get A Customer", "\tAs a system manager \r\n\tI want to get a default customers\r\n\tSo I can inspect the " +
-                    "customer", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customers/Commands/Update", "Update a Customer", "\tAs a system manager\r\n\tI want to Update a customer\r\n\tTo record a customers transa" +
+                    "ction", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,12 +75,12 @@ namespace Mc2.CrudTest.AcceptanceTests.Customers.Queries
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get A Customer")]
-        public void GetACustomer()
+        [NUnit.Framework.DescriptionAttribute("Update a Customer")]
+        public void UpdateACustomer()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get A Customer", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a Customer", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -91,25 +91,59 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.When("I request a default customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
                             "PhoneNumber",
                             "Email",
                             "BankAccountNumber",
                             "DateOfBirth"});
-                table3.AddRow(new string[] {
-                            "alireza",
-                            "davari",
-                            "09120556987",
-                            "alireza@email.com",
-                            "IR123456789",
-                            "2000-01-01"});
-#line 8
- testRunner.Then("the following customer should be returned:", ((string)(null)), table3, "Then ");
+                table6.AddRow(new string[] {
+                            "alirezaa",
+                            "davarii",
+                            "09120556999",
+                            "alireza@emailll.com",
+                            "IR123456777",
+                            "2003/02/01"});
+#line 7
+ testRunner.Given("the following customer update info:", ((string)(null)), table6, "Given ");
+#line hidden
+#line 10
+ testRunner.When("I Update a customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber",
+                            "DateOfBirth"});
+                table7.AddRow(new string[] {
+                            "alirezaa",
+                            "davarii",
+                            "09120556999",
+                            "alireza@emailll.com",
+                            "IR123456777",
+                            "2003/02/01"});
+#line 11
+ testRunner.Then("the following customer updated record should be recorded:", ((string)(null)), table7, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber",
+                            "DateOfBirth"});
+                table8.AddRow(new string[] {
+                            "alirezaa",
+                            "davarii",
+                            "09120556999",
+                            "alireza@emailll.com",
+                            "IR123456777",
+                            "2003/02/01"});
+#line 14
+ testRunner.And("the following customer updated record should be recorded in event store:", ((string)(null)), table8, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

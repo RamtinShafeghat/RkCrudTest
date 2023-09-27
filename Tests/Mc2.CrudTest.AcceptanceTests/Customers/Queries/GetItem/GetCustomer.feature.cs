@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Mc2.CrudTest.AcceptanceTests.Customers.Commands
+namespace Mc2.CrudTest.AcceptanceTests.Customers.Queries.GetItem
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,23 +20,23 @@ namespace Mc2.CrudTest.AcceptanceTests.Customers.Commands
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Create a Customer")]
-    public partial class CreateACustomerFeature
+    [NUnit.Framework.DescriptionAttribute("Get A Customer")]
+    public partial class GetACustomerFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "CreateCustomer.feature"
+#line 1 "GetCustomer.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customers/Commands", "Create a Customer", "\tAs a system manager\r\n\tI want to create a customer\r\n\tTo record a customers transa" +
-                    "ction", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Customers/Queries/GetItem", "Get A Customer", "\tAs a system manager \r\n\tI want to get a default customers\r\n\tSo I can inspect the " +
+                    "customer", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,12 +75,12 @@ namespace Mc2.CrudTest.AcceptanceTests.Customers.Commands
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a Customer")]
-        public void CreateACustomer()
+        [NUnit.Framework.DescriptionAttribute("Get A Customer")]
+        public void GetACustomer()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a Customer", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get A Customer", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -91,42 +91,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "PhoneNumber",
-                            "Email",
-                            "BankAccountNumber",
-                            "DateOfBirth"});
-                table1.AddRow(new string[] {
-                            "reza",
-                            "salari",
-                            "09125874132",
-                            "email@gamil.com",
-                            "65987874",
-                            "2001/02/03"});
 #line 7
- testRunner.Given("the following customer info:", ((string)(null)), table1, "Given ");
+ testRunner.When("I request a default customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 10
- testRunner.When("I create a customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
                             "PhoneNumber",
                             "Email",
                             "BankAccountNumber",
                             "DateOfBirth"});
-                table2.AddRow(new string[] {
-                            "reza",
-                            "salari",
-                            "09125874132",
-                            "email@gamil.com",
-                            "65987874",
-                            "2001-02-03"});
-#line 11
- testRunner.Then("the following customers record should be recorded:", ((string)(null)), table2, "Then ");
+                table9.AddRow(new string[] {
+                            "alireza",
+                            "davari",
+                            "09120556987",
+                            "alireza@email.com",
+                            "IR123456789",
+                            "2000-01-01"});
+#line 8
+ testRunner.Then("the following customer should be returned:", ((string)(null)), table9, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

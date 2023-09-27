@@ -8,6 +8,9 @@ Scenario: Create a Customer
 		| FirstName | LastName | PhoneNumber | Email           | BankAccountNumber | DateOfBirth |
 		| reza      | salari   | 09125874132 | email@gamil.com | 65987874          | 2001/02/03  |
 	When I create a customer
-	Then the following customers record should be recorded:
-		| FirstName | LastName | PhoneNumber | Email            | BankAccountNumber | DateOfBirth |
+	Then the following customer created record should be recorded:
+		| FirstName | LastName | PhoneNumber | Email           | BankAccountNumber | DateOfBirth |
+		| reza      | salari   | 09125874132 | email@gamil.com | 65987874          | 2001-02-03  |
+	And the following customer created record should be recorded in event store:
+		| FirstName | LastName | PhoneNumber | Email           | BankAccountNumber | DateOfBirth |
 		| reza      | salari   | 09125874132 | email@gamil.com | 65987874          | 2001-02-03  |
