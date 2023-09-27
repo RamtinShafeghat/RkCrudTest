@@ -26,11 +26,11 @@
 		<PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
 	</ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="D:\Projects\Rk Crud Test\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj" />
-      <ProjectReference Include="D:\Projects\Rk Crud Test\Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj" />
-      <ProjectReference Include="D:\Projects\Rk Crud Test\Mc2.CrudTest.Infrastructure\Mc2.CrudTest.Infrastructure.csproj" />
-      <ProjectReference Include="D:\Projects\Rk Crud Test\Mc2.CrudTest.Persistence\Mc2.CrudTest.Persistence.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj" />
+	  <ProjectReference Include="..\..\Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj" />
+	  <ProjectReference Include="..\..\Mc2.CrudTest.Infrastructure\Mc2.CrudTest.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Mc2.CrudTest.Persistence\Mc2.CrudTest.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>
