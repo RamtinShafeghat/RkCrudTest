@@ -7,7 +7,7 @@ namespace Mc2.CrudTest.Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration, bool useDb=true)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration, bool useDb = true)
     {
         if (useDb)
         {
