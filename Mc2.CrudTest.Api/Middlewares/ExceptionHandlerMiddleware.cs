@@ -28,34 +28,29 @@ public class ExceptionHandlerMiddleware
 
     private Task ConvertException(HttpContext context, Exception exception)
     {
-        HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
+        var (code, errors) = GetErrors(exception);
+
+        Log.Error(JsonSerializer.Serialize(errors));
+
+        var response = JsonSerializer.Serialize(new
+        {
+            Code = code,
+            Result = errors,
+        });
 
         context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)code;
+        return context.Response.WriteAsync(response);
+    }
 
-        var result = string.Empty;
-
-        switch (exception)
+    private static (HttpStatusCode code, object errors) GetErrors(Exception exception)
+    {
+        return exception switch
         {
-            case ValidationException validationException:
-                httpStatusCode = HttpStatusCode.BadRequest;
-                result = JsonSerializer.Serialize(validationException.ValdationErrors);
-                break;
-            case BadRequestException badRequestException:
-                httpStatusCode = HttpStatusCode.BadRequest;
-                result = JsonSerializer.Serialize(badRequestException.Message);
-                break;
-            case NotFoundException:
-                httpStatusCode = HttpStatusCode.NotFound;
-                result = JsonSerializer.Serialize(exception.Message);
-                break;
-            case Exception:
-                httpStatusCode = HttpStatusCode.BadRequest;
-                result = JsonSerializer.Serialize(exception.Message);
-                break;
-        }
-
-        Log.Error(result);
-        context.Response.StatusCode = (int)httpStatusCode;
-        return context.Response.WriteAsync(result);
+            ValidationException validationException => (HttpStatusCode.BadRequest, validationException.ValidationErrors),
+            BadRequestException badRequestException => (HttpStatusCode.BadRequest, badRequestException.Message),
+            NotFoundException _ => (HttpStatusCode.NotFound, exception.Message),
+            _ => (HttpStatusCode.InternalServerError, exception.Message)
+        };
     }
 }

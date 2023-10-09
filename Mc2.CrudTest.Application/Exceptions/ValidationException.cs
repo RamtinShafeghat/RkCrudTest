@@ -2,15 +2,15 @@
 
 public class ValidationException : Exception
 {
-    public List<string> ValdationErrors { get; set; }
+    public List<string> ValidationErrors { get; set; }
 
-    public ValidationException(ValidationResult validationResult)
+    public ValidationException(ValidationResult validationResult) //: base(string.Join(',', validationResult.Errors))
     {
-        ValdationErrors = new List<string>();
+        ValidationErrors = new List<string>();
 
         foreach (var validationError in validationResult.Errors)
         {
-            ValdationErrors.Add(validationError.ErrorMessage);
+            ValidationErrors.Add(validationError.ErrorMessage);
         }
     }
 }

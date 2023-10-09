@@ -31,16 +31,16 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPut(Name = "Update")]
-    [Authorize(Roles = "admin")]
-    public async Task<ActionResult<UpdateCustomerCommandResponse>> Update(
+    //[Authorize(Roles = "admin")]
+    public async Task<ActionResult> Update(
         [FromBody] UpdateCustomerCommand updateCommand)
     {
-        var response = await this.mediator.Send(updateCommand);
-        return Ok(response);
+        await this.mediator.Send(updateCommand);
+        return Ok();
     }
 
     [HttpDelete(Name = "Delete")]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public async Task<ActionResult> Delete(Guid id)
     {
         await this.mediator.Send(new DeleteCustomerCommand { Id = id});

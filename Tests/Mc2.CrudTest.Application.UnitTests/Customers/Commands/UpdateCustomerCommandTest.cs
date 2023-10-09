@@ -24,7 +24,7 @@ public class UpdateCustomerCommandTest
     [Fact]
     public async Task Update_Existing_Customer_By_Command()
     {
-        var handler = new UpdateCustomerCommandHandler(mapper, mockEventStore.Object, mockRepository.Object, default);
+        var handler = new UpdateCustomerCommandHandler(mapper, mockEventStore.Object, mockRepository.Object);
 
         var customerDto = RepositoryMocks.GetCustomerCommandDto();
         customerDto.FirstName = "ramin";

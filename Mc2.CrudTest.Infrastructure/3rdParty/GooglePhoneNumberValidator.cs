@@ -7,9 +7,15 @@ public class GooglePhoneNumberValidator : IExternalValidator
 {
     public bool ValidatePhoneNumber(string phoneNumber)
     {
+        _ = ulong.TryParse(phoneNumber, out var phoneNumberLong);
+
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.GetInstance();
 
-        PhoneNumber parsedNumber = phoneNumberUtil.Parse(phoneNumber, "IR");
-        return phoneNumberUtil.IsValidNumber(parsedNumber);
+        var ph = new PhoneNumber().CreateBuilderForType()
+                                  .SetNationalNumber(phoneNumberLong)
+                                  .SetCountryCode(98)
+                                  .Build();
+
+        return phoneNumberUtil.IsValidNumber(ph);
     }
 }

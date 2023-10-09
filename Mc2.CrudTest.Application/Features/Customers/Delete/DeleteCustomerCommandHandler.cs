@@ -2,8 +2,7 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class DeleteCustomerCommandHandler :
-    IRequestHandler<DeleteCustomerCommand>
+public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand>
 {
     private readonly ICustomerEventStore customerEventStore;
     private readonly ICustomerRepository customerRepository;

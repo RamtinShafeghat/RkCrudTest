@@ -2,7 +2,7 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
+public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
 {
     private readonly IExternalValidator exValidator;
 
@@ -14,7 +14,7 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
 
     private void Validate()
     {
-        RuleFor(customer => customer.FirstName)
+        RuleFor(customer => customer.Dto.FirstName)
             .NotEmpty()
             .WithMessage("FirstName is required")
             .NotEqual("string")
@@ -22,33 +22,33 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
             .MaximumLength(50)
             .WithMessage("FirstName max length is 50");
 
-        RuleFor(customer => customer.LastName)
+        RuleFor(customer => customer.Dto.LastName)
             .NotEmpty()
             .WithMessage("LastName is required")
             .NotEqual("string")
-            .WithMessage("FirstName can not be default")
+            .WithMessage("LastName can not be default")
             .MaximumLength(50)
             .WithMessage("LastName max length is 50");
 
-        RuleFor(customer => customer.DateOfBirth)
+        RuleFor(customer => customer.Dto.DateOfBirth)
             .NotEmpty()
             .WithMessage("DateOfBirth is required")
             .Must(ValidateDateOfBirth)
             .WithMessage("DateOfBirth is invalid");
 
-        RuleFor(x => x.PhoneNumber)
+        RuleFor(x => x.Dto.PhoneNumber)
             .NotEmpty()
             .WithMessage("PhoneNumber is required")
             .Must(ValidatePhoneNumber)
             .WithMessage("PhoneNumber is invalid");
 
-        RuleFor(x => x.Email)
+        RuleFor(x => x.Dto.Email)
             .NotEmpty()
             .WithMessage("EmailAddress is required")
             .EmailAddress()
             .WithMessage("EmailAddress is invalid");
 
-        RuleFor(x => x.BankAccountNumber)
+        RuleFor(x => x.Dto.BankAccountNumber)
            .NotEmpty()
            .WithMessage("BankAccountNumber is required")
            .Must(ValidateBankAccountNumber)
@@ -59,6 +59,7 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommandDto>
         dateOnly <= DateOnly.FromDateTime(DateTime.Now);
     private bool ValidatePhoneNumber(string phoneNumber) => 
         this.exValidator.ValidatePhoneNumber(phoneNumber);
+
     private bool ValidateBankAccountNumber(string accountNumber) =>
         accountNumber.All(char.IsLetterOrDigit) && accountNumber.Any(char.IsDigit) &&
         accountNumber.Length is >= 6 and <= 20;

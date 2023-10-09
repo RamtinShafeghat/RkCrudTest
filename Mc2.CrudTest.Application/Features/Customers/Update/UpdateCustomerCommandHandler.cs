@@ -2,65 +2,38 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class UpdateCustomerCommandHandler :
-    IRequestHandler<UpdateCustomerCommand, UpdateCustomerCommandResponse>
+public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand>
 {
     private readonly IMapper mapper;
     private readonly ICustomerEventStore eventStore;
     private readonly ICustomerRepository repository;
-    private readonly UpdateCustomerCommandValidator validator;
 
     public UpdateCustomerCommandHandler(
         IMapper mapper,
         ICustomerEventStore customerEventStore,
-        ICustomerRepository customerRepository,
-        UpdateCustomerCommandValidator validator)
+        ICustomerRepository customerRepository)
     {
         this.mapper = mapper;
         this.eventStore = customerEventStore;
         this.repository = customerRepository;
-        this.validator = validator;
     }
 
-    public async Task<UpdateCustomerCommandResponse> Handle(
+    public async Task<Unit> Handle(
         UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var response = new UpdateCustomerCommandResponse();
-        await Validate(request, response, cancellationToken);
+        var customer = await this.eventStore.RehydreateAsync(request.Id.ToString());
+        customer.ValidateExistence(request.Id);
 
-        if (response.Success)
+        var customerDto = this.mapper.Map<Customer.Dto>(request.Dto);
+        Customer.Update(customer, customerDto);
+
+        var t = await this.eventStore.GetTransaction();
+        await t.RunInside(async () =>
         {
-            var customer = await this.eventStore.RehydreateAsync(request.Id.ToString());
-            customer.ValidateExistence(request.Id);
+            await eventStore.SaveAsync(customer);
+            await repository.UpdateAsync(customer);
+        });
 
-            var customerDto = this.mapper.Map<Customer.Dto>(request.Dto);
-            Customer.Update(customer, customerDto);
-
-            var t = await this.eventStore.GetTransaction();
-            await t.RunInside(async () =>
-            {
-                await eventStore.SaveAsync(customer);
-                await repository.UpdateAsync(customer);
-            });
-        }
-
-        return response;
-    }
-
-    private async Task Validate(
-        UpdateCustomerCommand request, 
-        UpdateCustomerCommandResponse response, 
-        CancellationToken cancellationToken)
-    {
-        if (validator != default)
-        {
-            var validationResult = await this.validator.ValidateAsync(request.Dto, cancellationToken);
-            if (validationResult.Errors.Count > 0)
-            {
-                response.Success = false;
-                response.Message = "Update Failed";
-                response.ValidationErrors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
-            }
-        }
+        return Unit.Value;
     }
 }

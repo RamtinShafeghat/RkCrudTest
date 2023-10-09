@@ -24,7 +24,7 @@ public class CreateCustomerCommandTest
     [Fact]
     public async Task Create_New_Customer_By_Command()
     {
-        var handler = new CreateCustomerCommandHandler(mapper, mockEventStore.Object, mockRepository.Object, default);
+        var handler = new CreateCustomerCommandHandler(mapper, mockEventStore.Object, mockRepository.Object);
 
         var customerDto = RepositoryMocks.GetCustomerCommandDto();
 

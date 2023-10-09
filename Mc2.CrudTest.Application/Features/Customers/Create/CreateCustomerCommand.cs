@@ -1,6 +1,5 @@
 ﻿namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class CreateCustomerCommand : IRequest<CreateCustomerCommandResponse>
+public class CreateCustomerCommand : CustomerCommand, IRequest<CreateCustomerCommandResponse>
 {
-    public CustomerCommandDto Dto { get; set; }
 }
