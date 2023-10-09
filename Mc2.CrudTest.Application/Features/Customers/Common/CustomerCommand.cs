@@ -1,7 +1,8 @@
 ﻿namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class CustomerCommand
+public abstract class CustomerCommand
 {
+    public abstract Guid ExistingCustomerId { get; }
     public CustomerCommandDto Dto { get; set; }
 }
 

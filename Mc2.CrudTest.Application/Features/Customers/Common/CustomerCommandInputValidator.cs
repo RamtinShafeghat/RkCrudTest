@@ -2,11 +2,11 @@
 
 namespace Mc2.CrudTest.Application.Features.Customers;
 
-public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
+public class CustomerCommandInputValidator : AbstractValidator<CustomerCommand>
 {
     private readonly IExternalValidator exValidator;
 
-    public CustomerCommandValidator(IExternalValidator externalValidator) : base()
+    public CustomerCommandInputValidator(IExternalValidator externalValidator) : base()
     {
         this.exValidator = externalValidator;
         Validate();
@@ -36,19 +36,19 @@ public class CustomerCommandValidator : AbstractValidator<CustomerCommand>
             .Must(ValidateDateOfBirth)
             .WithMessage("DateOfBirth is invalid");
 
-        RuleFor(x => x.Dto.PhoneNumber)
+        RuleFor(customer => customer.Dto.PhoneNumber)
             .NotEmpty()
             .WithMessage("PhoneNumber is required")
             .Must(ValidatePhoneNumber)
             .WithMessage("PhoneNumber is invalid");
 
-        RuleFor(x => x.Dto.Email)
+        RuleFor(customer => customer.Dto.Email)
             .NotEmpty()
             .WithMessage("EmailAddress is required")
             .EmailAddress()
             .WithMessage("EmailAddress is invalid");
 
-        RuleFor(x => x.Dto.BankAccountNumber)
+        RuleFor(customer => customer.Dto.BankAccountNumber)
            .NotEmpty()
            .WithMessage("BankAccountNumber is required")
            .Must(ValidateBankAccountNumber)

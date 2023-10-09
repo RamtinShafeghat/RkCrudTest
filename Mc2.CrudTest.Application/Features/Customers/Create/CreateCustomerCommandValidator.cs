@@ -2,8 +2,10 @@
 
 public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
 {
-    public CreateCustomerCommandValidator(CustomerCommandValidator validator) : base()
+    public CreateCustomerCommandValidator(CustomerCommandInputValidator inputValidator,
+                                          CustomerCommandBusinessValidator businessValidator) : base()
     {
-        Include(validator);
+        Include(inputValidator);
+        Include(businessValidator);
     }
 }
